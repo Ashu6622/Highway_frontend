@@ -59,7 +59,6 @@ const ContextApi = ({children})=>{
     try{
         setIsLoading(true);
         const {data} = await userLogin({email:formData.email, otp:formData.otp}); 
-        console.log(data);
         setIsLoading(false);
 
         resetForm();
@@ -110,7 +109,6 @@ const ContextApi = ({children})=>{
   const handleLoggedIn = async ()=>{
 
         const {data} = await isLoggedIn();
-        console.log(data);
 
         if(data.status !== 200 || data.data.message?.includes('Token not found') || data.data.message?.includes('Token is not valid')){
             setIsDashboard(false);
@@ -146,7 +144,6 @@ const ContextApi = ({children})=>{
 
       
       const {data} = await getOTP({email:formData.email});
-      console.log(data);
       setIsLoading(false);
       
       if(data.message.includes('OTP sent successfully')){
@@ -182,7 +179,6 @@ const ContextApi = ({children})=>{
         toast.error('Session Expired Login Again', { autoClose: 1500 });
         return;
       }
-      console.log(data);
       setNewNote({content: '' });
       setShowCreateForm(false);
       note._id = data.id
@@ -199,10 +195,7 @@ const ContextApi = ({children})=>{
 
   const handleDeleteNote = async (id) => {
 
-    console.log(id);
     const {data} = await deleteTask(id);
-
-    console.log(data);
     setNotes(notes.filter(note => note._id !== id));
     toast.success('Task Deleted', { autoClose: 1500 });
   };

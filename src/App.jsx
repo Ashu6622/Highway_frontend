@@ -8,16 +8,11 @@ import 'react-toastify/dist/ReactToastify.css'
 
 
 function App() {
-  const handleAuthSuccess = (userData) => {
-    console.log('Authentication successful:', userData);
-    // You can handle the successful authentication here
-    // For example: redirect to dashboard, store user data, etc.
-  };
 
   return (
 
     <BrowserRouter>
-      {/* <AuthComponent onAuthSuccess={handleAuthSuccess} /> */}
+     
       <ContextApi>      
 
         <Routes>
