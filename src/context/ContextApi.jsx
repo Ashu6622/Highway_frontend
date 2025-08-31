@@ -44,11 +44,11 @@ const ContextApi = ({children})=>{
       setOtpSent(true);
       setIsLoading(false);
       if(data.message.includes('OTP sent successfully')){
-        toast.success('OTP sent to Mail', { autoClose: 1500 });
+        return toast.success('OTP sent to Mail', { autoClose: 1500 });
       }
     }
     catch(error){
-        toast.error('Try Again', { autoClose: 1500 });
+        return toast.error('Try Again', { autoClose: 1500 });
     }
   };
 
@@ -66,14 +66,16 @@ const ContextApi = ({children})=>{
         if(data.status === 200 && data.message.includes('Successfully Login')){
           toast.success(data.message, { autoClose: 1500 });
           navigate('/dashboard');
+          return;
         }
         else{
           toast.error(data.message, { autoClose: 1500 });
-          // navigate('/login');
+          navigate('/login');
+          return;
         }
     }
     catch(error){
-      toast.error('Try Again', { autoClose: 1500 });
+        return toast.error('Try Again', { autoClose: 1500 });
     }
 
   };
@@ -89,17 +91,19 @@ const ContextApi = ({children})=>{
     
       resetForm();
       if(data.status === 201 && data.message.includes('Successfully Login')){
-        navigate('/dashboard');
         toast.success(data.message, { autoClose: 1500 });
+        navigate('/dashboard');
+        return;
         
       }
       else{
         toast.error(data.message, { autoClose: 1500 });
         navigate('/login');
+        return;
       }
     }
     catch(error){
-        toast.error('Try Again', { autoClose: 1500 });
+        return toast.error('Try Again', { autoClose: 1500 });
     }
   };
 
@@ -110,8 +114,8 @@ const ContextApi = ({children})=>{
 
         if(data.status !== 200 || data.data.message?.includes('Token not found') || data.data.message?.includes('Token is not valid')){
             setIsDashboard(false);
-            console.log("****");
-            // navigate('/login');
+            navigate('/login');
+            return;
         }
         else{
             setIsDashboard(false);
